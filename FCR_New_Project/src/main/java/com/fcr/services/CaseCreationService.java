@@ -34,7 +34,7 @@ public class CaseCreationService {
 
 		try {
 			fcrRepository.save(details);
-			return "Case Creation Success";
+			return "Case Creation Success with Review Id:"+details.getReviewId();
 		} catch (Exception e) {
 			return "Case Creation Failed";
 		}
