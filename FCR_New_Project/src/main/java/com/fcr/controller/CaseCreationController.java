@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import com.fcr.services.TaskService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -44,6 +46,12 @@ public class CaseCreationController {
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
 		String created = creationService.createCase(caseCreation);
 		return new ResponseEntity<String>(created,HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateCase")
+	public ResponseEntity<String> updateCase(@RequestParam String role ,@RequestParam String assignTo , @RequestParam  String reviewId){
+		creationService.updateCase(role,assignTo, reviewId);
+		return null;
 	}
 	
 	@GetMapping("/MyTask")

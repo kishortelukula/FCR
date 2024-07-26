@@ -24,8 +24,9 @@ public class CaseCreationService {
 	public AuditService auditService;
 
 	public String createCase(CaseCreation caseCreation) {
-		String fixedString = "FCR-";
+		String inTime = LocalDate.now().toString();
 
+		String fixedString = "FCR-";
 		String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy"));
 
 		Random random = new Random();
@@ -36,11 +37,10 @@ public class CaseCreationService {
 		System.out.println(reviewId);
 
 		TaskDetails details = TaskDetails.builder().reviewId(reviewId).division(caseCreation.getDivision())
-				.portfolio(caseCreation.getPortfolio()).assignTo("SR Credit Reviewer").taskStatus("Created").build();
-
+				.portfolio(caseCreation.getPortfolio()).assignTo("SR Credit Reviewer").taskStatus("Created").role("SR Credit Reviewer").build();
+//Auditing
 		AuditTrail trail = AuditTrail.builder().reviewId(reviewId).actionedBy("").activityLevel("SR Credit Reviewer")
-				.currentAction("CaseCreation").inTime(LocalDateTime.now().toString())
-				.outTime(LocalDateTime.now().toString()).build();
+				.currentAction("CaseCreation").inTime(inTime).outTime(LocalDateTime.now().toString()).build();
 		auditService.insertAudit(trail);
 
 		try {
@@ -51,6 +51,10 @@ public class CaseCreationService {
 			return "Case Creation Failed";
 		}
 
+	}
+
+	public void updateCase(String role ,String assignTo,String reviewId) {
+		fcrRepository.updateCase(role,assignTo,reviewId);
 	}
 
 }

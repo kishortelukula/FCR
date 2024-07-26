@@ -28,6 +28,7 @@ public class TaskDetails {
 	private String childReviedId;
 	private String issueId;
 	private String trackIssueId;
+	private String role;
 	
 
 }
