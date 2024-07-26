@@ -1,5 +1,7 @@
 package com.fcr.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class AuditService {
 	public String insertAudit(AuditTrail trail) {
 		auditRepo.save(trail);
 		return "Audit Inserted";
+	}
+	
+	public List<AuditTrail> fetchAudit(String reviewId){
+		
+		return auditRepo.getAudit(reviewId);
 	}
 
 }

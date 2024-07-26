@@ -21,6 +21,11 @@ public class TaskService {
 	public List<TaskDetails> getMyTasks(String userName){
 		return repository.myTask(userName);
 	}
+
+	public List<TaskDetails> fetchReviewId(String reviewId) {
+		// TODO Auto-generated method stub
+		return repository.fetchByReviewId(reviewId);
+	}
 	
 
 }

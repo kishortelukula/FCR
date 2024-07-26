@@ -20,6 +20,9 @@ public interface FcrRepository extends JpaRepository<TaskDetails, Long>{
 	@Query("select a from TaskDetails as a  where a.assignTo=?1")
 	public List<TaskDetails> myTask(String userName);
 	
+	@Query("select a from TaskDetails as a  where a.reviewId=?1")
+	public List<TaskDetails> fetchByReviewId(String reviewId);
+	
 	@Modifying
 	@Transactional
 	@Query("UPDATE TaskDetails t SET t.role = :role ,assignTo =:assignTo WHERE t.reviewId = :reviewId")

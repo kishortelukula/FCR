@@ -54,6 +54,12 @@ public class CaseCreationController {
 		return null;
 	}
 	
+	@GetMapping("/fetchByReviewId")
+	public ResponseEntity<List<TaskDetails>> fetchReview(@RequestParam String reviewId) {
+		return new ResponseEntity<List<TaskDetails>>(taskService.fetchReviewId(reviewId),HttpStatus.OK);
+	
+	}
+	
 	@GetMapping("/MyTask")
 	public ResponseEntity<List<TaskDetails>> getMethodName(@RequestParam("userName") String userName) {
 		return new ResponseEntity<List<TaskDetails>>(taskService.getMyTasks(userName),HttpStatus.OK);
@@ -80,4 +86,9 @@ public class CaseCreationController {
 		String audit = auditService.insertAudit(auditTrail);
 		return new ResponseEntity<String>(audit,HttpStatus.OK);
 	}
-}
+	
+	@GetMapping("/fetchAudit")
+	public ResponseEntity<List<AuditTrail>> getAudit(@RequestParam String reviewId){
+		return new ResponseEntity<List<AuditTrail>>(auditService.fetchAudit(reviewId),HttpStatus.OK);
+		
+	}}
