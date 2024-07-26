@@ -1,13 +1,16 @@
 package com.fcr.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fcr.dto.CaseCreation;
+import com.fcr.entity.AuditTrail;
 import com.fcr.entity.TaskDetails;
 import com.fcr.repository.FcrRepository;
 
@@ -16,6 +19,9 @@ public class CaseCreationService {
 
 	@Autowired
 	FcrRepository fcrRepository;
+
+	@Autowired
+	public AuditService auditService;
 
 	public String createCase(CaseCreation caseCreation) {
 		String fixedString = "FCR-";
@@ -32,9 +38,15 @@ public class CaseCreationService {
 		TaskDetails details = TaskDetails.builder().reviewId(reviewId).division(caseCreation.getDivision())
 				.portfolio(caseCreation.getPortfolio()).assignTo("SR Credit Reviewer").taskStatus("Created").build();
 
+		AuditTrail trail = AuditTrail.builder().reviewId(reviewId).actionedBy("").activityLevel("SR Credit Reviewer")
+				.currentAction("CaseCreation").inTime(LocalDateTime.now().toString())
+				.outTime(LocalDateTime.now().toString()).build();
+		auditService.insertAudit(trail);
+
 		try {
 			fcrRepository.save(details);
-			return "Case Creation Success with Review Id:"+details.getReviewId();
+			return "Case Creation Success with Review Id:" + details.getReviewId();
+
 		} catch (Exception e) {
 			return "Case Creation Failed";
 		}

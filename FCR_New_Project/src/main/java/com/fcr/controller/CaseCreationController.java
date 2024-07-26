@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fcr.dto.CaseCreation;
+import com.fcr.entity.AuditTrail;
 import com.fcr.entity.TaskDetails;
+import com.fcr.services.AuditService;
 import com.fcr.services.CaseCreationService;
 import com.fcr.services.FcrAdminService;
 import com.fcr.services.TaskService;
@@ -34,6 +36,10 @@ public class CaseCreationController {
 	
 	@Autowired
 	FcrAdminService fcrAdminService;
+	
+	@Autowired
+	AuditService auditService;
+	
 	@PostMapping("/caseCreation")
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
 		String created = creationService.createCase(caseCreation);
@@ -61,4 +67,9 @@ public class CaseCreationController {
 		return new ResponseEntity<List<String>>(fcrAdminService.allGroups(),HttpStatus.OK);
 	}
 	
+	@PostMapping("/auditTrail")
+	public ResponseEntity<String> insertAudit(@RequestBody AuditTrail auditTrail){
+		String audit = auditService.insertAudit(auditTrail);
+		return new ResponseEntity<String>(audit,HttpStatus.OK);
+	}
 }
