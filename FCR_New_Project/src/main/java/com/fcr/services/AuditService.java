@@ -29,5 +29,10 @@ public class AuditService {
 		return auditTrail.getSlNo().toString();
 		
 	}
+	
+	public String auditAfter(String currentAction,String outTime,String reviewId, String slNo){
+		auditRepo.updateAudit(currentAction, outTime, reviewId, slNo);
+		return "Updated Successful";
+	}
 
 }

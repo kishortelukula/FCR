@@ -98,5 +98,11 @@ public class CaseCreationController {
 		String res = auditService.auditBefore(auditTrail);
 		return new ResponseEntity<String>(res,HttpStatus.OK);
 	}
+	
+	@PutMapping("/updateAuidt")
+	public ResponseEntity<String> auditAfter(@RequestParam String currentAction,@RequestParam String outTime,@RequestParam String reviewId,@RequestParam String slNo){
+		String result = auditService.auditAfter(currentAction, outTime, reviewId, slNo);
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
 //	-------------------------
 }
