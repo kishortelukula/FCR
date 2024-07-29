@@ -24,4 +24,10 @@ public class AuditService {
 		return auditRepo.getAudit(reviewId);
 	}
 
+	public String auditBefore(AuditTrail auditTrail,String reviewId) {
+		auditRepo.save(auditTrail);
+		return auditTrail.getSlNo().toString();
+		
+	}
+
 }

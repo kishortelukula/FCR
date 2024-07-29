@@ -3,7 +3,6 @@ package com.fcr.services;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class CaseCreationService {
 
 		TaskDetails details = TaskDetails.builder().reviewId(reviewId).division(caseCreation.getDivision())
 				.portfolio(caseCreation.getPortfolio()).assignTo("SR Credit Reviewer").taskStatus("Created").role("SR Credit Reviewer").build();
-//Auditing
+//Auditing 
 		AuditTrail trail = AuditTrail.builder().reviewId(reviewId).actionedBy("").activityLevel("SR Credit Reviewer")
 				.currentAction("CaseCreation").inTime(inTime).outTime(LocalDateTime.now().toString()).build();
 		auditService.insertAudit(trail);

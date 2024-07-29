@@ -1,7 +1,5 @@
 package com.fcr.dto;
 
-import com.fcr.entity.TaskDetails;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

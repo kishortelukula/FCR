@@ -23,7 +23,7 @@ public class TaskService {
 	}
 
 	public List<TaskDetails> fetchReviewId(String reviewId) {
-		// TODO Auto-generated method stub
+		
 		return repository.fetchByReviewId(reviewId);
 	}
 	

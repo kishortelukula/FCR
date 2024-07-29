@@ -80,7 +80,7 @@ public class CaseCreationController {
 	public ResponseEntity<List<String>> allGroups(){
 		return new ResponseEntity<List<String>>(fcrAdminService.allGroups(),HttpStatus.OK);
 	}
-	
+//Audit-------------	
 	@PostMapping("/auditTrail")
 	public ResponseEntity<String> insertAudit(@RequestBody AuditTrail auditTrail){
 		String audit = auditService.insertAudit(auditTrail);
@@ -91,4 +91,12 @@ public class CaseCreationController {
 	public ResponseEntity<List<AuditTrail>> getAudit(@RequestParam String reviewId){
 		return new ResponseEntity<List<AuditTrail>>(auditService.fetchAudit(reviewId),HttpStatus.OK);
 		
-	}}
+	}
+	
+	@PutMapping("/insertAudit")
+	public ResponseEntity<String> auditBefore(@RequestParam AuditTrail auditTrail,@PathVariable String reviewId){
+		String res = auditService.auditBefore(auditTrail,reviewId);
+		return new ResponseEntity<String>(res,HttpStatus.OK);
+	}
+//	-------------------------
+}
