@@ -24,7 +24,7 @@ public class AuditService {
 		return auditRepo.getAudit(reviewId);
 	}
 
-	public String auditBefore(AuditTrail auditTrail,String reviewId) {
+	public String auditBefore(AuditTrail auditTrail) {
 		auditRepo.save(auditTrail);
 		return auditTrail.getSlNo().toString();
 		

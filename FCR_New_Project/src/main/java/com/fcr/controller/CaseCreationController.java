@@ -93,9 +93,9 @@ public class CaseCreationController {
 		
 	}
 	
-	@PutMapping("/insertAudit")
-	public ResponseEntity<String> auditBefore(@RequestParam AuditTrail auditTrail,@PathVariable String reviewId){
-		String res = auditService.auditBefore(auditTrail,reviewId);
+	@PostMapping("/insertAudit")
+	public ResponseEntity<String> auditBefore(@RequestBody AuditTrail auditTrail){
+		String res = auditService.auditBefore(auditTrail);
 		return new ResponseEntity<String>(res,HttpStatus.OK);
 	}
 //	-------------------------
