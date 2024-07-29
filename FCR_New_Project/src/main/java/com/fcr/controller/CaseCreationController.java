@@ -22,6 +22,7 @@ import com.fcr.services.FcrAdminService;
 import com.fcr.services.TaskService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -121,6 +122,12 @@ public class CaseCreationController {
 	@GetMapping("/getComments")
 	public ResponseEntity<List<Comments>> getComments(@RequestParam String reviewId){
 		return new ResponseEntity<List<Comments>>(commentService.fetchComments(reviewId),HttpStatus.OK);
+		
+	}
+	@DeleteMapping("/deleteComments")
+	public ResponseEntity<String> deleteComments(@RequestParam String reviewId,@RequestParam Long slNo){
+		String res = commentService.deleteComments(reviewId,slNo);
+		return new ResponseEntity<String>(res,HttpStatus.OK); 
 		
 	}
 	

@@ -3,6 +3,7 @@ package com.fcr.services;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class CaseCreationService {
 
 		String fixedString = "FCR-";
 		String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy"));
-
+		
 		Random random = new Random();
 		int randomNumber = random.nextInt(900) + 100;
 
@@ -54,6 +55,7 @@ public class CaseCreationService {
 
 	public void updateCase(String role ,String assignTo,String reviewId) {
 		fcrRepository.updateCase(role,assignTo,reviewId);
+		
 	}
 
 }

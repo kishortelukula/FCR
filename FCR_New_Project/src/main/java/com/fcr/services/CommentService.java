@@ -24,4 +24,9 @@ public class CommentService {
 		return commentRepo.getComments(reviewId);
 	}
 
+	public String deleteComments(String reviewId, Long slNo) {
+		commentRepo.deleteByReviewIdAndSlNo(reviewId, slNo);
+		return "Delete Succesfully";
+	}
+
 }
