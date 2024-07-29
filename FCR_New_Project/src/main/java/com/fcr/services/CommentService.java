@@ -1,0 +1,27 @@
+package com.fcr.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fcr.entity.Comments;
+import com.fcr.repository.commentRepo;
+
+@Service
+public class CommentService {
+
+	@Autowired
+	public commentRepo commentRepo;
+
+	public String insertcomment(Comments comments) {
+		commentRepo.save(comments);
+		return "Comments Inserted";
+	}
+
+	public List<Comments> fetchComments(String reviewId) {
+
+		return commentRepo.getComments(reviewId);
+	}
+
+}

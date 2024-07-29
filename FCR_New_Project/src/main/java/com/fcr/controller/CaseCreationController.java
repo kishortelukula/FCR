@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fcr.dto.CaseCreation;
 import com.fcr.entity.AuditTrail;
+import com.fcr.entity.Comments;
 import com.fcr.entity.TaskDetails;
 import com.fcr.services.AuditService;
 import com.fcr.services.CaseCreationService;
+import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
 import com.fcr.services.TaskService;
 
@@ -41,6 +43,9 @@ public class CaseCreationController {
 	
 	@Autowired
 	AuditService auditService;
+	
+	@Autowired
+	CommentService commentService;
 	
 	@PostMapping("/caseCreation")
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
@@ -105,4 +110,19 @@ public class CaseCreationController {
 		return new ResponseEntity<String>(result,HttpStatus.OK);
 	}
 //	-------------------------
+	
+//	Comments-----------------
+	@PostMapping("/comments")
+	public ResponseEntity<String> insertComments(@RequestBody Comments comments){
+		String res = commentService.insertcomment(comments);
+		return new ResponseEntity<String>(res,HttpStatus.OK);
+	}
+
+	@GetMapping("/getComments")
+	public ResponseEntity<List<Comments>> getComments(@RequestParam String reviewId){
+		return new ResponseEntity<List<Comments>>(commentService.fetchComments(reviewId),HttpStatus.OK);
+		
+	}
+	
+//	---------------------------
 }
