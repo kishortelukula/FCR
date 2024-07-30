@@ -154,6 +154,6 @@ public class CaseCreationController {
 	public ResponseEntity<List<CaseDetails>> fetchCaseDetails(@RequestParam String reviewId){
 		return new ResponseEntity<List<CaseDetails>>(caseDetailsService.fetchCaseDetails(reviewId),HttpStatus.OK);
 	}
-	
+	 
 //	-------------------------------
 }
