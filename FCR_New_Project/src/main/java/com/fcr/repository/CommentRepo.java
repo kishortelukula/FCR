@@ -20,5 +20,5 @@ public interface CommentRepo extends JpaRepository<Comments, Long>{
 	@Query("DELETE FROM Comments t WHERE t.reviewId = :reviewId AND t.slNo = :slNo")
 	public void deleteByReviewIdAndSlNo(String reviewId, Long slNo);
  
-
+     
 }
