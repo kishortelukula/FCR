@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fcr.dto.CaseCreation;
 import com.fcr.entity.AuditTrail;
+import com.fcr.entity.CaseDetails;
 import com.fcr.entity.Comments;
 import com.fcr.entity.TaskDetails;
 import com.fcr.services.AuditService;
 import com.fcr.services.CaseCreationService;
+import com.fcr.services.CaseDetailsService;
 import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
 import com.fcr.services.TaskService;
@@ -48,16 +50,19 @@ public class CaseCreationController {
 	@Autowired
 	CommentService commentService;
 	
+	@Autowired
+	CaseDetailsService caseDetailsService;
+	
 	@PostMapping("/caseCreation")
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
 		String created = creationService.createCase(caseCreation);
 		return new ResponseEntity<String>(created,HttpStatus.OK);
 	}
 	
-	@PutMapping("/updateCase")
+	@PutMapping("/updateTask")
 	public ResponseEntity<String> updateCase(@RequestParam String role ,@RequestParam String assignTo , @RequestParam  String reviewId){
 		creationService.updateCase(role,assignTo, reviewId);
-		return null;
+		return new ResponseEntity<String>("UpdatedTask",HttpStatus.OK);
 	}
 	
 	@GetMapping("/fetchByReviewId")
@@ -132,4 +137,11 @@ public class CaseCreationController {
 	}
 	
 //	---------------------------
+//	caseDetails-------------------
+	@PostMapping("/caseDetails")
+	public ResponseEntity<String> insertCaseDetails(@RequestBody CaseDetails caseDetails){
+		String res = caseDetailsService.insertcasedetails(caseDetails);
+		return new ResponseEntity<String>(res,HttpStatus.OK);
+	}
+//	-------------------------------
 }
