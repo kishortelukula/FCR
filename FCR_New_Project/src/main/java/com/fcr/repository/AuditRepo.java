@@ -18,7 +18,7 @@ public interface AuditRepo extends JpaRepository<AuditTrail, Long>{
 	
 	@Modifying
 	@Transactional
-	@Query("UPDATE AuditTrail t SET t.currentAction = :currentAction ,t.outTime =:outTime WHERE t.reviewId = :reviewId and t.slNo")
+	@Query("UPDATE AuditTrail a SET a.currentAction = :currentAction, a.outTime = :outTime WHERE a.reviewId = :reviewId AND a.slNo = :slNo")
 	public void updateAudit(String currentAction,String outTime,String reviewId,String slNo);
 
 }
