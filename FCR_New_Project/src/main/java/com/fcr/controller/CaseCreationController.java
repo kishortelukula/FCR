@@ -138,7 +138,7 @@ public class CaseCreationController {
 	
 //	---------------------------
 //	caseDetails-------------------
-	@PostMapping("/caseDetails")
+	@PostMapping("/insertcaseDetails")
 	public ResponseEntity<String> insertCaseDetails(@RequestBody CaseDetails caseDetails){
 		String res = caseDetailsService.insertcasedetails(caseDetails);
 		return new ResponseEntity<String>(res,HttpStatus.OK);
@@ -149,5 +149,11 @@ public class CaseCreationController {
 		String result	= caseDetailsService.updateCaseDetails(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview, reviewId);
 		return new ResponseEntity<String>(result,HttpStatus.OK); 
 	}
+	
+	@GetMapping("/fetchCaseDetails")
+	public ResponseEntity<List<CaseDetails>> fetchCaseDetails(@RequestParam String reviewId){
+		return new ResponseEntity<List<CaseDetails>>(caseDetailsService.fetchCaseDetails(reviewId),HttpStatus.OK);
+	}
+	
 //	-------------------------------
 }

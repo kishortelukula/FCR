@@ -1,5 +1,7 @@
 package com.fcr.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +20,8 @@ public interface CaseDetailsRepo extends JpaRepository<CaseDetails, Long> {
 	public void updateAudit(String childReviewId, String issueId, String trackIssueId, String headOfFcrAction,
 			String caseStatus, String srCreditReview, String headOfFcr, String creditReview,
 			String reviewId);
+	
+	@Query("select a from CaseDetails as a  where a.reviewId=?1")
+	public List<CaseDetails> getcaseDetails(String reviewId);
 
 }

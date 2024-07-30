@@ -1,5 +1,7 @@
 package com.fcr.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +25,11 @@ public class CaseDetailsService {
 		
 		caseDetailsRepo.updateAudit(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview, reviewId);
 		return "Updated case Details";
+	}
+
+	public List<CaseDetails> fetchCaseDetails(String reviewId) {
+		List<CaseDetails> details =caseDetailsRepo.getcaseDetails(reviewId);
+		return details;
 	}
 	
 	
