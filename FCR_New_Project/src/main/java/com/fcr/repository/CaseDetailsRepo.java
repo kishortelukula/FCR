@@ -16,7 +16,7 @@ public interface CaseDetailsRepo extends JpaRepository<CaseDetails, Long> {
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE CaseDetails c SET c.childReviewId = :childReviewId ,c.issueId =:issueId,c.trackIssueId=:trackIssueId,c.headOfFcrAction=:headOfFcrAction,c.caseStatus=:caseStatus,c.srCreditReview=:srCreditReview,c.headOfFcr=:headOfFcr,c.creditReview=:creditReview, WHERE c.reviewId = :reviewId")
+	@Query("UPDATE CaseDetails c SET c.childReviewId = :childReviewId ,c.issueId =:issueId,c.trackIssueId=:trackIssueId,c.headOfFcrAction=:headOfFcrAction,c.caseStatus=:caseStatus,c.srCreditReview=:srCreditReview,c.headOfFcr=:headOfFcr,c.creditReview=:creditReview WHERE c.reviewId = :reviewId")
 	public void updateAudit(String childReviewId, String issueId, String trackIssueId, String headOfFcrAction,
 			String caseStatus, String srCreditReview, String headOfFcr, String creditReview,
 			String reviewId);
