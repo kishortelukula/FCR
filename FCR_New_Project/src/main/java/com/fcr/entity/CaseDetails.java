@@ -22,7 +22,7 @@ public class CaseDetails {
 	private String reviewId;
 	private String division;
 	private String portfolio;
-	private String childReviedId;
+	private String childReviewId;
 	private String issueId;
 	private String trackIssueId;
 	private String headOfFcrAction;

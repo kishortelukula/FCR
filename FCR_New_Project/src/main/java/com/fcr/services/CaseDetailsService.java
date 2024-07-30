@@ -3,6 +3,7 @@ package com.fcr.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fcr.entity.CaseDetails;
 import com.fcr.repository.CaseDetailsRepo;
@@ -17,5 +18,13 @@ public class CaseDetailsService {
 		caseDetailsRepo.save(caseDetails);
 		return "inserted";
 	}
+	
+	public String updateCaseDetails(@RequestParam String childReviewId,@RequestParam String issueId,@RequestParam String trackIssueId,@RequestParam String headOfFcrAction,@RequestParam String caseStatus,@RequestParam String srCreditReview,@RequestParam String headOfFcr,@RequestParam String creditReview,@RequestParam String reviewId ) {
+		
+		caseDetailsRepo.updateAudit(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview, reviewId);
+		return "Updated case Details";
+	}
+	
+	
 
 }
