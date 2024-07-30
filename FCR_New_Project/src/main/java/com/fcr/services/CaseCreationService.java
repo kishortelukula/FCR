@@ -37,7 +37,7 @@ public class CaseCreationService {
 		System.out.println(reviewId);
 
 		TaskDetails details = TaskDetails.builder().reviewId(reviewId).division(caseCreation.getDivision())
-				.portfolio(caseCreation.getPortfolio()).assignTo("SR Credit Reviewer").taskStatus("Created").role("SR Credit Reviewer").build();
+				.portfolio(caseCreation.getPortfolio()).assignTo("SR Credit Reviewer").taskStatus("Created").role(caseCreation.getRole()).build();
 //Auditing 
 		AuditTrail trail = AuditTrail.builder().reviewId(reviewId).actionedBy("").activityLevel("SR Credit Reviewer")
 				.currentAction("CaseCreation").inTime(inTime).outTime(LocalDateTime.now().toString()).build();

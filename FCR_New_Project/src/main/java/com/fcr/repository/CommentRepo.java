@@ -10,7 +10,7 @@ import com.fcr.entity.Comments;
 
 import jakarta.transaction.Transactional;
 
-public interface commentRepo extends JpaRepository<Comments, Long>{
+public interface CommentRepo extends JpaRepository<Comments, Long>{
 	
 	@Query("select a from Comments as a  where a.reviewId=?1")
 	public List<Comments> getComments(String reviewId);

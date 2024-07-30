@@ -13,5 +13,6 @@ public class CaseCreation {
 	private String reviewId;
 	private String division;
 	private String portfolio;
+	private String role;
 
 }

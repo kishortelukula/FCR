@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fcr.entity.Comments;
-import com.fcr.repository.commentRepo;
+import com.fcr.repository.CommentRepo;
 
 @Service
 public class CommentService {
 
 	@Autowired
-	public commentRepo commentRepo;
+	public CommentRepo commentRepo;
 
 	public String insertcomment(Comments comments) {
 		commentRepo.save(comments);
