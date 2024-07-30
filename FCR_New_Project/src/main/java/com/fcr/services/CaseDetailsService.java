@@ -31,7 +31,7 @@ public class CaseDetailsService {
 		List<CaseDetails> details =caseDetailsRepo.getcaseDetails(reviewId);
 		return details;
 	} 
-	
+	 
 	
 
 }

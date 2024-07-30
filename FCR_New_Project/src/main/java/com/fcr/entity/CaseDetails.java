@@ -30,4 +30,5 @@ public class CaseDetails {
 	private String srCreditReview;
 	private String headOfFcr;
 	private String creditReview;
+	private String planningStage;
 }
