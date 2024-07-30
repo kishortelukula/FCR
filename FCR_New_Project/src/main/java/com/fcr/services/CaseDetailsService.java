@@ -30,7 +30,7 @@ public class CaseDetailsService {
 	public List<CaseDetails> fetchCaseDetails(String reviewId) {
 		List<CaseDetails> details =caseDetailsRepo.getcaseDetails(reviewId);
 		return details;
-	}
+	} 
 	
 	
 
