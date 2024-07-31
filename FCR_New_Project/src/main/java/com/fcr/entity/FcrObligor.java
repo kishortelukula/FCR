@@ -28,7 +28,7 @@ public class FcrObligor {
 	private String reviewStatus;//REVIEW_STATUS;
 	private String division;//DIVISION;
 	private String observation;//OBSERVATION;
-	private String childReview;//CHILD_REVIEWID;
+	private String childReviewId;//CHILD_REVIEWID;
 	
 
 }
