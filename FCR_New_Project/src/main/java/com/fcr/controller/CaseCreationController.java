@@ -145,8 +145,8 @@ public class CaseCreationController {
 	}
 	
 	@PutMapping("/updateCaseDetails")
-	public ResponseEntity<String> updateCaseDetails(@RequestParam String childReviewId,@RequestParam String issueId,@RequestParam String trackIssueId,@RequestParam String headOfFcrAction,@RequestParam String caseStatus,@RequestParam String srCreditReview,@RequestParam String headOfFcr,@RequestParam String creditReview,@RequestParam String reviewId ) {
-		String result	= caseDetailsService.updateCaseDetails(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview, reviewId);
+	public ResponseEntity<String> updateCaseDetails(@RequestParam String childReviewId,@RequestParam String issueId,@RequestParam String trackIssueId,@RequestParam String headOfFcrAction,@RequestParam String caseStatus,@RequestParam String srCreditReview,@RequestParam String headOfFcr,@RequestParam String creditReview,@RequestParam String planningStage,@RequestParam String reviewId ) {
+		String result	= caseDetailsService.updateCaseDetails(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview,planningStage, reviewId);
 		return new ResponseEntity<String>(result,HttpStatus.OK); 
 	}
 	

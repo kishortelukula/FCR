@@ -21,9 +21,9 @@ public class CaseDetailsService {
 		return "inserted";
 	}
 	
-	public String updateCaseDetails(@RequestParam String childReviewId,@RequestParam String issueId,@RequestParam String trackIssueId,@RequestParam String headOfFcrAction,@RequestParam String caseStatus,@RequestParam String srCreditReview,@RequestParam String headOfFcr,@RequestParam String creditReview,@RequestParam String reviewId ) {
+	public String updateCaseDetails(@RequestParam String childReviewId,@RequestParam String issueId,@RequestParam String trackIssueId,@RequestParam String headOfFcrAction,@RequestParam String caseStatus,@RequestParam String srCreditReview,@RequestParam String headOfFcr,@RequestParam String creditReview,@RequestParam String planningStage,@RequestParam String reviewId ) {
 		
-		caseDetailsRepo.updateAudit(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview, reviewId);
+		caseDetailsRepo.updateAudit(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview,planningStage, reviewId);
 		return "Updated case Details";
 	}
 
