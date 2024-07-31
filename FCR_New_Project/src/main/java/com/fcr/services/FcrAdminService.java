@@ -26,7 +26,7 @@ public class FcrAdminService {
 
 	public List<String> spocList(String groupname,String division){
 		String res = repo.spocList(groupname, division);
-		if(res!="") {
+		if(res!=null) {
 		List<String> l1 = Arrays.stream(res.split(","))
                 .collect(Collectors.toList());
 		System.out.println(l1);
