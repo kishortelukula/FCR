@@ -23,5 +23,8 @@ public class FCRAdmin {
 	private String division;
 	@Column(name = "GROUPNAME")
 	private String groupname;
+	@Column(name = "PRIMARY_OWNER")
+	private String primaryOwner;
+	
 
 }
