@@ -1,5 +1,6 @@
 package com.fcr.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,10 +26,14 @@ public class FcrAdminService {
 
 	public List<String> spocList(String groupname,String division){
 		String res = repo.spocList(groupname, division);
+		if(res!="") {
 		List<String> l1 = Arrays.stream(res.split(","))
                 .collect(Collectors.toList());
 		System.out.println(l1);
+		
 		return l1;
+		}else
+			return new ArrayList<>();
 	}
 
 }
