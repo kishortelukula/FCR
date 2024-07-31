@@ -15,12 +15,14 @@ import com.fcr.dto.CaseCreation;
 import com.fcr.entity.AuditTrail;
 import com.fcr.entity.CaseDetails;
 import com.fcr.entity.Comments;
+import com.fcr.entity.FcrObligor;
 import com.fcr.entity.TaskDetails;
 import com.fcr.services.AuditService;
 import com.fcr.services.CaseCreationService;
 import com.fcr.services.CaseDetailsService;
 import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
+import com.fcr.services.ObligorService;
 import com.fcr.services.TaskService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -52,6 +54,9 @@ public class CaseCreationController {
 	
 	@Autowired
 	CaseDetailsService caseDetailsService;
+	
+	@Autowired
+	ObligorService obligorService;
 	
 	@PostMapping("/caseCreation")
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
@@ -160,4 +165,16 @@ public class CaseCreationController {
 	}
 	 
 //	-------------------------------
+//	Obligor-------------
+	@PostMapping("/insertobligor")
+	public ResponseEntity<String> insertobligor(@RequestBody FcrObligor fcrObligor){
+		String res = obligorService.insertObligor(fcrObligor);
+		return new ResponseEntity<String>(res,HttpStatus.OK);
+	}
+	
+	@GetMapping("/fetchObligor")
+	public ResponseEntity<List<FcrObligor>> ftchObligor(@RequestParam String reviewId){
+		return new ResponseEntity<List<FcrObligor>>(obligorService.fetchObligor(reviewId),HttpStatus.OK);
+	}
+//	-----------------------------
 }
