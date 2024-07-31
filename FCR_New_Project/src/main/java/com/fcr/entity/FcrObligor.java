@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class FcrObligor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String obligorId;//OBLIGOR_ID;
+	private Long obligorId;//OBLIGOR_ID;
 	private String reviewId;//REVIEW_ID;
 	private String obligorName;//OBLIGOR_NAME;
 	private String obligorCifId;//OBLIGOR_CIF_ID;
