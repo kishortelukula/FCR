@@ -91,6 +91,10 @@ public class CaseCreationController {
 	public ResponseEntity<List<String>> allGroups(){
 		return new ResponseEntity<List<String>>(fcrAdminService.allGroups(),HttpStatus.OK);
 	}
+	@GetMapping("/getSpocList")
+	public ResponseEntity<List<String>> getSpoc(@RequestParam String groupname,@RequestParam String division){
+		return new ResponseEntity<List<String>>(fcrAdminService.spocList(groupname, division),HttpStatus.OK);
+	}
 //Audit-------------	
 	@PostMapping("/auditTrail")
 	public ResponseEntity<String> insertAudit(@RequestBody AuditTrail auditTrail){
@@ -115,7 +119,7 @@ public class CaseCreationController {
 		String result = auditService.auditAfter(currentAction, outTime, reviewId, slNo);
 		return new ResponseEntity<String>(result,HttpStatus.OK);
 	}
-//	-------------------------
+//	------------------------- 
 	
 //	Comments-----------------
 	@PostMapping("/comments")

@@ -16,5 +16,8 @@ public interface FCRAdminCofigRepo extends JpaRepository<FCRAdmin, Long> {
 	
 	@Query("select a.division from FCRAdmin as a where a.groupname=?1")
 	public List<String> findDivisionByGroup(String groupName);
+	
+	@Query("select a.primaryOwner from FCRAdmin as a where a.groupname=:groupname and a.division=:division")
+	public String spocList(String groupname,String division);
 
 }
