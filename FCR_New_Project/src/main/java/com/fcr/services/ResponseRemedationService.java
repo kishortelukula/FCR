@@ -28,4 +28,9 @@ public class ResponseRemedationService {
 		return "ResponseRemedation Updated Succesfully";
 		
 	}
+	
+	public String deleteResponseRemedation(String reviewId,String childReviewId) {
+		remedationRepo.deleteByReviewIdAndChildReviewId(reviewId, childReviewId);
+		return "Deleted Successfully";
+	}
 }

@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fcr.entity.FcrObligor;
 import com.fcr.repository.ObligorRepo;
+import com.fcr.repository.ResponseRemedationRepo;
 
 @Service
 public class ObligorService {
 	
 	@Autowired
 	ObligorRepo obligorRepo;
+	
+	@Autowired
+	ResponseRemedationRepo remedationRepo;
 	
 	public String insertObligor(FcrObligor obligor) {
 		obligorRepo.save(obligor);
@@ -29,6 +33,13 @@ public class ObligorService {
 	public String updateObligor(String reviewStatus,String reviewId,String childReview) {
 		obligorRepo.updateObligor(reviewStatus, reviewId, childReview);
 		return "Obligor Updated Succesfully";
+		
+	}
+	
+	public String deleteObligor(String reviewId,String childReviewId) {
+		obligorRepo.deleteObligor(reviewId, childReviewId);
+		remedationRepo.deleteByReviewIdAndChildReviewId(reviewId, childReviewId);
+		return "Obligor Deleted Successfully";
 		
 	}
 }

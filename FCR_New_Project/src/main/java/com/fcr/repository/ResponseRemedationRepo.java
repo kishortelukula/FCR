@@ -21,4 +21,9 @@ public interface ResponseRemedationRepo extends JpaRepository<FcrResponseRemedat
 	@Modifying
 	@Query("update FcrResponseRemedations f set f.reviewStatus=:reviewStatus where f.reviewId=:reviewId and f.childReviewId=:childReview")
 	public String updateResponseRemedation(String reviewStatus, String reviewId, String childReview);
+	
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM FcrResponseRemedations t WHERE t.reviewId = :reviewId AND t.childReviewId = :childReviewId")
+	public void deleteByReviewIdAndChildReviewId(String reviewId, String childReviewId);
 }

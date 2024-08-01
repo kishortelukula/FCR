@@ -69,6 +69,8 @@ public class CaseCreationController {
 	@Autowired
     private FileUpload fileUpload;
 	
+	
+	
 	@PostMapping("/caseCreation")
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
 		String created = creationService.createCase(caseCreation);
@@ -187,6 +189,11 @@ public class CaseCreationController {
 	public ResponseEntity<List<FcrObligor>> fetchObligor(@RequestParam String reviewId){
 		return new ResponseEntity<List<FcrObligor>>(obligorService.fetchObligor(reviewId),HttpStatus.OK);
 	}
+	@DeleteMapping("/deleteObligor")
+	public ResponseEntity<String> deleteObligor(@RequestParam String reviewId,@RequestParam String childReviewId) {
+		String result = obligorService.deleteObligor(reviewId, childReviewId);
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
 //	-----------------------------
 //	ResponseRemedation-------------
 	@PostMapping("/insertResponseRemedation")
@@ -199,12 +206,20 @@ public class CaseCreationController {
 	public ResponseEntity<List<FcrResponseRemedations>> fetchResponseRemedation(@RequestParam String reviewId){
 		return new ResponseEntity<List<FcrResponseRemedations>>(responseRemedationService.fetchResponseRemedation(reviewId),HttpStatus.OK);
 	}
+	@DeleteMapping("/deleteResponseRemedation")
+	public ResponseEntity<String> deleteResponseRemedation(@RequestParam String reviewId,@RequestParam String childReviewId) {
+		String result = responseRemedationService.deleteResponseRemedation(reviewId, childReviewId);
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
 //	-----------------------------
-//	-------------------------
+//	-------------File Upload------------
 	@PostMapping("/uploadFile")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
         fileUpload.store(file);
         return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
     }
 //	--------------------
+//	-----------------------------
+	
+//	----------------------------------
 }
