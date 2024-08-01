@@ -33,4 +33,10 @@ public class ResponseRemedationService {
 		remedationRepo.deleteByReviewIdAndChildReviewId(reviewId, childReviewId);
 		return "Deleted Successfully";
 	}
+	
+	public String updateQuery(String query,String reviewId,String childReviewId) {
+		remedationRepo.updateFcrResponseRemedations(query, reviewId, childReviewId);
+		return "Query Updated Succesfully";
+		
+	}
 }

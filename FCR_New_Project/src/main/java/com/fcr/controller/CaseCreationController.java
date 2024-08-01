@@ -25,7 +25,6 @@ import com.fcr.services.CaseDetailsService;
 import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
 import com.fcr.services.FileUpload;
-import com.fcr.services.FileUploadService;
 import com.fcr.services.ObligorService;
 import com.fcr.services.ResponseRemedationService;
 import com.fcr.services.TaskService;
@@ -33,7 +32,6 @@ import com.fcr.services.TaskService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -216,6 +214,11 @@ public class CaseCreationController {
 	public ResponseEntity<String> deleteResponseRemedation(@RequestParam String reviewId,@RequestParam String childReviewId) {
 		String result = responseRemedationService.deleteResponseRemedation(reviewId, childReviewId);
 		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
+	@PutMapping("/updateQuery")
+	public ResponseEntity<String> updateQuery(@RequestParam String query,@RequestParam String reviewId,@RequestParam String childReviewId) {
+		String querys = responseRemedationService.updateQuery(query, reviewId, childReviewId);
+		return new ResponseEntity<String>(querys,HttpStatus.OK);
 	}
 //	-----------------------------
 //	-------------File Upload------------
