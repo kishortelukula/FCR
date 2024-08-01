@@ -16,6 +16,7 @@ import com.fcr.entity.AuditTrail;
 import com.fcr.entity.CaseDetails;
 import com.fcr.entity.Comments;
 import com.fcr.entity.FcrObligor;
+import com.fcr.entity.FcrResponseRemedation;
 import com.fcr.entity.TaskDetails;
 import com.fcr.services.AuditService;
 import com.fcr.services.CaseCreationService;
@@ -23,6 +24,7 @@ import com.fcr.services.CaseDetailsService;
 import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
 import com.fcr.services.ObligorService;
+import com.fcr.services.ResponseRemedationService;
 import com.fcr.services.TaskService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,6 +59,9 @@ public class CaseCreationController {
 	
 	@Autowired
 	ObligorService obligorService;
+	
+	@Autowired
+	ResponseRemedationService responseRemedationService;
 	
 	@PostMapping("/caseCreation")
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
@@ -173,8 +178,20 @@ public class CaseCreationController {
 	}
 	
 	@GetMapping("/fetchObligor")
-	public ResponseEntity<List<FcrObligor>> ftchObligor(@RequestParam String reviewId){
+	public ResponseEntity<List<FcrObligor>> fetchObligor(@RequestParam String reviewId){
 		return new ResponseEntity<List<FcrObligor>>(obligorService.fetchObligor(reviewId),HttpStatus.OK);
+	}
+//	-----------------------------
+//	ResponseRemedation-------------
+	@PostMapping("/insertResponseRemedation")
+	public ResponseEntity<String> insertResponseRemedation(@RequestBody FcrResponseRemedation fcrResponseRemedation){
+		String res = responseRemedationService.insertResponseRemedation(fcrResponseRemedation);
+		return new ResponseEntity<String>(res,HttpStatus.OK);
+	}
+	
+	@GetMapping("/fetchResponseRemedation")
+	public ResponseEntity<List<FcrResponseRemedation>> fetchResponseRemedation(@RequestParam String reviewId){
+		return new ResponseEntity<List<FcrResponseRemedation>>(responseRemedationService.fetchResponseRemedation(reviewId),HttpStatus.OK);
 	}
 //	-----------------------------
 }

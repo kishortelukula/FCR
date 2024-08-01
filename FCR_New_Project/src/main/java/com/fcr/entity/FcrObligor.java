@@ -1,5 +1,6 @@
 package com.fcr.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class FcrObligor {
 	private String modifiedOn;//MODIFIED_ON;
 	private String reviewStatus;//REVIEW_STATUS;
 	private String division;//DIVISION;
+	@Column(length = 300)
 	private String observation;//OBSERVATION;
 	private String childReviewId;//CHILD_REVIEWID;
 	
