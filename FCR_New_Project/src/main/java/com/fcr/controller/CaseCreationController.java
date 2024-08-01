@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fcr.dto.CaseCreation;
 import com.fcr.entity.AuditTrail;
@@ -23,6 +24,8 @@ import com.fcr.services.CaseCreationService;
 import com.fcr.services.CaseDetailsService;
 import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
+import com.fcr.services.FileUpload;
+import com.fcr.services.FileUploadService;
 import com.fcr.services.ObligorService;
 import com.fcr.services.ResponseRemedationService;
 import com.fcr.services.TaskService;
@@ -62,6 +65,9 @@ public class CaseCreationController {
 	
 	@Autowired
 	ResponseRemedationService responseRemedationService;
+	
+	@Autowired
+    private FileUpload fileUpload;
 	
 	@PostMapping("/caseCreation")
 	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
@@ -194,4 +200,11 @@ public class CaseCreationController {
 		return new ResponseEntity<List<FcrResponseRemedations>>(responseRemedationService.fetchResponseRemedation(reviewId),HttpStatus.OK);
 	}
 //	-----------------------------
+//	-------------------------
+	@PostMapping("/uploadFile")
+    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+        fileUpload.store(file);
+        return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
+    }
+//	--------------------
 }
