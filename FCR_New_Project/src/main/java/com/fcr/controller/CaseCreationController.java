@@ -16,7 +16,7 @@ import com.fcr.entity.AuditTrail;
 import com.fcr.entity.CaseDetails;
 import com.fcr.entity.Comments;
 import com.fcr.entity.FcrObligor;
-import com.fcr.entity.FcrResponseRemedation;
+import com.fcr.entity.FcrResponseRemedations;
 import com.fcr.entity.TaskDetails;
 import com.fcr.services.AuditService;
 import com.fcr.services.CaseCreationService;
@@ -184,14 +184,14 @@ public class CaseCreationController {
 //	-----------------------------
 //	ResponseRemedation-------------
 	@PostMapping("/insertResponseRemedation")
-	public ResponseEntity<String> insertResponseRemedation(@RequestBody FcrResponseRemedation fcrResponseRemedation){
+	public ResponseEntity<String> insertResponseRemedation(@RequestBody FcrResponseRemedations fcrResponseRemedation){
 		String res = responseRemedationService.insertResponseRemedation(fcrResponseRemedation);
 		return new ResponseEntity<String>(res,HttpStatus.OK);
 	}
 	
 	@GetMapping("/fetchResponseRemedation")
-	public ResponseEntity<List<FcrResponseRemedation>> fetchResponseRemedation(@RequestParam String reviewId){
-		return new ResponseEntity<List<FcrResponseRemedation>>(responseRemedationService.fetchResponseRemedation(reviewId),HttpStatus.OK);
+	public ResponseEntity<List<FcrResponseRemedations>> fetchResponseRemedation(@RequestParam String reviewId){
+		return new ResponseEntity<List<FcrResponseRemedations>>(responseRemedationService.fetchResponseRemedation(reviewId),HttpStatus.OK);
 	}
 //	-----------------------------
 }
