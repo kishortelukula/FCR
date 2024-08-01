@@ -33,7 +33,6 @@ public class FcrResponseRemedations {
 		private String createdOn;// CREATED_ON;
 		private String reviewStatus;// REVIEW_STATUS;
 		private String division;// DIVISION;
-		private String observation;// OBSERVATION;
 		private String childReviewId;// CHILD_dgfhREVIEWID;
 
 }
