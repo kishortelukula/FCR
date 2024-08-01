@@ -26,4 +26,9 @@ public interface ObligorRepo extends JpaRepository<FcrObligor, Long>{
 	@Modifying
 	@Query("DELETE FROM FcrObligor t WHERE t.reviewId = :reviewId AND t.childReviewId = :childReviewId")
 	public void deleteObligor(String reviewId, String childReviewId);
+	
+	@Transactional
+	@Modifying
+	@Query("update FcrObligor f set f.observation=:observation where f.reviewId=:reviewId and f.childReviewId=:childReviewId")
+	public String updateObservation(String observation,String reviewId,String childReviewId);
 }

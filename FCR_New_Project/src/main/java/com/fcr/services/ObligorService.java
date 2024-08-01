@@ -42,4 +42,10 @@ public class ObligorService {
 		return "Obligor Deleted Successfully";
 		
 	}
+	
+	public String updateObservation(String observation,String reviewId,String childReviewId) {
+		obligorRepo.updateObservation(observation, reviewId, childReviewId);
+		return "Observation Updated Succesfully";
+		
+	}
 }

@@ -194,6 +194,12 @@ public class CaseCreationController {
 		String result = obligorService.deleteObligor(reviewId, childReviewId);
 		return new ResponseEntity<String>(result,HttpStatus.OK);
 	}
+	
+	@PutMapping("/updateObservation")
+	public ResponseEntity<String> updateObservation(@RequestParam String observation,@RequestParam String reviewId,@RequestParam String childReviewId) {
+		String obser = obligorService.updateObservation(observation, reviewId, childReviewId);
+		return new ResponseEntity<String>(obser,HttpStatus.OK);
+	}
 //	-----------------------------
 //	ResponseRemedation-------------
 	@PostMapping("/insertResponseRemedation")
