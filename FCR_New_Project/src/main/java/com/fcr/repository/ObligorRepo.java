@@ -30,5 +30,5 @@ public interface ObligorRepo extends JpaRepository<FcrObligor, Long>{
 	@Transactional
 	@Modifying
 	@Query("update FcrObligor f set f.observation=:observation where f.reviewId=:reviewId and f.childReviewId=:childReviewId")
-	public String updateObservation(String observation,String reviewId,String childReviewId);
+	public void updateObservation(String observation,String reviewId,String childReviewId);
 }
