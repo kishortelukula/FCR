@@ -39,242 +39,266 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 @RequestMapping("/fcr")
 @CrossOrigin("*")
 public class CaseCreationController {
-	
+
 	@Autowired
 	private CaseCreationService creationService;
-	
+
 	@Autowired
 	private TaskService taskService;
-	
+
 	@Autowired
 	FcrAdminService fcrAdminService;
-	
+
 	@Autowired
 	AuditService auditService;
-	
+
 	@Autowired
 	CommentService commentService;
-	
+
 	@Autowired
 	CaseDetailsService caseDetailsService;
-	
+
 	@Autowired
 	ObligorService obligorService;
-	
+
 	@Autowired
 	ResponseRemedationService responseRemedationService;
-	
+
 	@Autowired
-    private FileUpload fileUpload;
-	
+	private FileUpload fileUpload;
+
 	@Autowired
 	QueryService queryService;
-	
+
 	@Autowired
 	FcrDocTagService docTagService;
-	
-	
+
 	@PostMapping("/caseCreation")
-	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation){
+	public ResponseEntity<String> caseCreation(@RequestBody CaseCreation caseCreation) {
 		String created = creationService.createCase(caseCreation);
-		return new ResponseEntity<String>(created,HttpStatus.OK);
+		return new ResponseEntity<String>(created, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/updateTask")
-	public ResponseEntity<String> updateCase(@RequestParam String role ,@RequestParam String assignTo , @RequestParam  String reviewId){
-		creationService.updateCase(role,assignTo, reviewId);
-		return new ResponseEntity<String>("UpdatedTask",HttpStatus.OK);
+	public ResponseEntity<String> updateCase(@RequestParam String role, @RequestParam String assignTo,
+			@RequestParam String reviewId) {
+		creationService.updateCase(role, assignTo, reviewId);
+		return new ResponseEntity<String>("UpdatedTask", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/fetchByReviewId")
 	public ResponseEntity<List<TaskDetails>> fetchReview(@RequestParam String reviewId) {
-		return new ResponseEntity<List<TaskDetails>>(taskService.fetchReviewId(reviewId),HttpStatus.OK);
-	
+		return new ResponseEntity<List<TaskDetails>>(taskService.fetchReviewId(reviewId), HttpStatus.OK);
+
 	}
-	
+
 	@GetMapping("/MyTask")
 	public ResponseEntity<List<TaskDetails>> getMethodName(@RequestParam("userName") String userName) {
-		return new ResponseEntity<List<TaskDetails>>(taskService.getMyTasks(userName),HttpStatus.OK);
-	
+		return new ResponseEntity<List<TaskDetails>>(taskService.getMyTasks(userName), HttpStatus.OK);
+
 	}
+
 	@GetMapping("/GroupTask")
-	public ResponseEntity<List<TaskDetails>> getGropu(@RequestParam("groupName") String groupName,@RequestParam("userName") String userName) {
-		return new ResponseEntity<List<TaskDetails>>(taskService.getGroupTasks(groupName, userName),HttpStatus.OK);
-	
+	public ResponseEntity<List<TaskDetails>> getGropu(@RequestParam("groupName") String groupName,
+			@RequestParam("userName") String userName) {
+		return new ResponseEntity<List<TaskDetails>>(taskService.getGroupTasks(groupName, userName), HttpStatus.OK);
+
 	}
-	
+
 	@GetMapping("/Group")
-	public ResponseEntity<List<String>> findDivision(@RequestParam("group") String group){
-		return new ResponseEntity<List<String>>(fcrAdminService.divisionByGroup(group),HttpStatus.OK);
+	public ResponseEntity<List<String>> findDivision(@RequestParam("group") String group) {
+		return new ResponseEntity<List<String>>(fcrAdminService.divisionByGroup(group), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/Division")
-	public ResponseEntity<List<String>> allGroups(){
-		return new ResponseEntity<List<String>>(fcrAdminService.allGroups(),HttpStatus.OK);
+	public ResponseEntity<List<String>> allGroups() {
+		return new ResponseEntity<List<String>>(fcrAdminService.allGroups(), HttpStatus.OK);
 	}
+
 	@GetMapping("/getSpocList")
-	public ResponseEntity<List<String>> getSpoc(@RequestParam String groupname,@RequestParam String division){
-		return new ResponseEntity<List<String>>(fcrAdminService.spocList(groupname, division),HttpStatus.OK);
+	public ResponseEntity<List<String>> getSpoc(@RequestParam String groupname, @RequestParam String division) {
+		return new ResponseEntity<List<String>>(fcrAdminService.spocList(groupname, division), HttpStatus.OK);
 	}
+
 //Audit-------------	
 	@PostMapping("/auditTrail")
-	public ResponseEntity<String> insertAudit(@RequestBody AuditTrail auditTrail){
+	public ResponseEntity<String> insertAudit(@RequestBody AuditTrail auditTrail) {
 		String audit = auditService.insertAudit(auditTrail);
-		return new ResponseEntity<String>(audit,HttpStatus.OK);
+		return new ResponseEntity<String>(audit, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/fetchAudit")
-	public ResponseEntity<List<AuditTrail>> getAudit(@RequestParam String reviewId){
-		return new ResponseEntity<List<AuditTrail>>(auditService.fetchAudit(reviewId),HttpStatus.OK);
-		
+	public ResponseEntity<List<AuditTrail>> getAudit(@RequestParam String reviewId) {
+		return new ResponseEntity<List<AuditTrail>>(auditService.fetchAudit(reviewId), HttpStatus.OK);
+
 	}
-	
+
 	@PostMapping("/insertAudit")
-	public ResponseEntity<String> auditBefore(@RequestBody AuditTrail auditTrail){
+	public ResponseEntity<String> auditBefore(@RequestBody AuditTrail auditTrail) {
 		String res = auditService.auditBefore(auditTrail);
-		return new ResponseEntity<String>(res,HttpStatus.OK);
+		return new ResponseEntity<String>(res, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/updateAuidt")
-	public ResponseEntity<String> auditAfter(@RequestParam String currentAction,@RequestParam String outTime,@RequestParam String reviewId,@RequestParam String slNo){
+	public ResponseEntity<String> auditAfter(@RequestParam String currentAction, @RequestParam String outTime,
+			@RequestParam String reviewId, @RequestParam String slNo) {
 		String result = auditService.auditAfter(currentAction, outTime, reviewId, slNo);
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 //	------------------------- 
-	
+
 //	Comments-----------------
 	@PostMapping("/comments")
-	public ResponseEntity<String> insertComments(@RequestBody Comments comments){
+	public ResponseEntity<String> insertComments(@RequestBody Comments comments) {
 		String res = commentService.insertcomment(comments);
-		return new ResponseEntity<String>(res,HttpStatus.OK);
+		return new ResponseEntity<String>(res, HttpStatus.OK);
 	}
 
 	@GetMapping("/getComments")
-	public ResponseEntity<List<Comments>> getComments(@RequestParam String reviewId){
-		return new ResponseEntity<List<Comments>>(commentService.fetchComments(reviewId),HttpStatus.OK);
-		
+	public ResponseEntity<List<Comments>> getComments(@RequestParam String reviewId) {
+		return new ResponseEntity<List<Comments>>(commentService.fetchComments(reviewId), HttpStatus.OK);
+
 	}
+
 	@DeleteMapping("/deleteComments")
-	public ResponseEntity<String> deleteComments(@RequestParam String reviewId,@RequestParam Long slNo){
-		String res = commentService.deleteComments(reviewId,slNo);
-		return new ResponseEntity<String>(res,HttpStatus.OK); 
-		
+	public ResponseEntity<String> deleteComments(@RequestParam String reviewId, @RequestParam Long slNo) {
+		String res = commentService.deleteComments(reviewId, slNo);
+		return new ResponseEntity<String>(res, HttpStatus.OK);
+
 	}
-	
+
 //	---------------------------
 //	caseDetails-------------------
 	@PostMapping("/insertcaseDetails")
-	public ResponseEntity<String> insertCaseDetails(@RequestBody CaseDetails caseDetails){
+	public ResponseEntity<String> insertCaseDetails(@RequestBody CaseDetails caseDetails) {
 		String res = caseDetailsService.insertcasedetails(caseDetails);
-		return new ResponseEntity<String>(res,HttpStatus.OK);
+		return new ResponseEntity<String>(res, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/updateCaseDetails")
-	public ResponseEntity<String> updateCaseDetails(@RequestParam String childReviewId,@RequestParam String issueId,@RequestParam String trackIssueId,@RequestParam String headOfFcrAction,@RequestParam String caseStatus,@RequestParam String srCreditReview,@RequestParam String headOfFcr,@RequestParam String creditReview,@RequestParam String planningStage,@RequestParam String reviewId ) {
-		String result	= caseDetailsService.updateCaseDetails(childReviewId, issueId, trackIssueId, headOfFcrAction, caseStatus, srCreditReview, headOfFcr, creditReview,planningStage, reviewId);
-		return new ResponseEntity<String>(result,HttpStatus.OK); 
+	public ResponseEntity<String> updateCaseDetails(@RequestParam String childReviewId, @RequestParam String issueId,
+			@RequestParam String trackIssueId, @RequestParam String headOfFcrAction, @RequestParam String caseStatus,
+			@RequestParam String srCreditReview, @RequestParam String headOfFcr, @RequestParam String creditReview,
+			@RequestParam String planningStage, @RequestParam String reviewId) {
+		String result = caseDetailsService.updateCaseDetails(childReviewId, issueId, trackIssueId, headOfFcrAction,
+				caseStatus, srCreditReview, headOfFcr, creditReview, planningStage, reviewId);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/fetchCaseDetails")
-	public ResponseEntity<List<CaseDetails>> fetchCaseDetails(@RequestParam String reviewId){
-		return new ResponseEntity<List<CaseDetails>>(caseDetailsService.fetchCaseDetails(reviewId),HttpStatus.OK);
+	public ResponseEntity<List<CaseDetails>> fetchCaseDetails(@RequestParam String reviewId) {
+		return new ResponseEntity<List<CaseDetails>>(caseDetailsService.fetchCaseDetails(reviewId), HttpStatus.OK);
 	}
-	 
+
 //	-------------------------------
-//	Obligor-------------
+//	---Obligor-------------
 	@PostMapping("/insertobligor")
-	public ResponseEntity<String> insertobligor(@RequestBody FcrObligor fcrObligor){
+	public ResponseEntity<String> insertobligor(@RequestBody FcrObligor fcrObligor) {
 		String res = obligorService.insertObligor(fcrObligor);
-		return new ResponseEntity<String>(res,HttpStatus.OK);
+		return new ResponseEntity<String>(res, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/fetchObligor")
-	public ResponseEntity<List<FcrObligor>> fetchObligor(@RequestParam String reviewId){
-		return new ResponseEntity<List<FcrObligor>>(obligorService.fetchObligor(reviewId),HttpStatus.OK);
+	public ResponseEntity<List<FcrObligor>> fetchObligor(@RequestParam String reviewId) {
+		return new ResponseEntity<List<FcrObligor>>(obligorService.fetchObligor(reviewId), HttpStatus.OK);
 	}
+
 	@DeleteMapping("/deleteObligor")
-	public ResponseEntity<String> deleteObligor(@RequestParam String reviewId,@RequestParam String childReviewId) {
+	public ResponseEntity<String> deleteObligor(@RequestParam String reviewId, @RequestParam String childReviewId) {
 		String result = obligorService.deleteObligor(reviewId, childReviewId);
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/updateObservation")
-	public ResponseEntity<String> updateObservation(@RequestParam String observation,@RequestParam String reviewId,@RequestParam String childReviewId) {
+	public ResponseEntity<String> updateObservation(@RequestParam String observation, @RequestParam String reviewId,
+			@RequestParam String childReviewId) {
 		String obser = obligorService.updateObservation(observation, reviewId, childReviewId);
-		return new ResponseEntity<String>(obser,HttpStatus.OK);
+		return new ResponseEntity<String>(obser, HttpStatus.OK);
 	}
+
 //	-----------------------------
 //	ResponseRemedation-------------
 	@PostMapping("/insertResponseRemedation")
-	public ResponseEntity<String> insertResponseRemedation(@RequestBody FcrResponseRemedations fcrResponseRemedation){
+	public ResponseEntity<String> insertResponseRemedation(@RequestBody FcrResponseRemedations fcrResponseRemedation) {
 		String res = responseRemedationService.insertResponseRemedation(fcrResponseRemedation);
-		return new ResponseEntity<String>(res,HttpStatus.OK);
+		return new ResponseEntity<String>(res, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/fetchResponseRemedation")
-	public ResponseEntity<List<FcrResponseRemedations>> fetchResponseRemedation(@RequestParam String reviewId){
-		return new ResponseEntity<List<FcrResponseRemedations>>(responseRemedationService.fetchResponseRemedation(reviewId),HttpStatus.OK);
+	public ResponseEntity<List<FcrResponseRemedations>> fetchResponseRemedation(@RequestParam String reviewId) {
+		return new ResponseEntity<List<FcrResponseRemedations>>(
+				responseRemedationService.fetchResponseRemedation(reviewId), HttpStatus.OK);
 	}
+
 	@DeleteMapping("/deleteResponseRemedation")
-	public ResponseEntity<String> deleteResponseRemedation(@RequestParam String reviewId,@RequestParam String childReviewId) {
+	public ResponseEntity<String> deleteResponseRemedation(@RequestParam String reviewId,
+			@RequestParam String childReviewId) {
 		String result = responseRemedationService.deleteResponseRemedation(reviewId, childReviewId);
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
+
 	@PutMapping("/updateQuery")
-	public ResponseEntity<String> updateQuery(@RequestParam String query,@RequestParam String reviewId,@RequestParam String childReviewId) {
+	public ResponseEntity<String> updateQuery(@RequestParam String query, @RequestParam String reviewId,
+			@RequestParam String childReviewId) {
 		String querys = responseRemedationService.updateQuery(query, reviewId, childReviewId);
-		return new ResponseEntity<String>(querys,HttpStatus.OK);
+		return new ResponseEntity<String>(querys, HttpStatus.OK);
 	}
+
 //	-----------------------------
 //	-------------File Upload------------
 	@PostMapping("/uploadFile")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-        fileUpload.store(file);
-        return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
-    }
+	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+		fileUpload.store(file);
+		return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
+	}
+
 //	--------------------
 //	----------------Query-------------
 	@PostMapping("/insertQuery")
-	public ResponseEntity<String> insertQuery(@RequestBody FcrQuery fcrQuery){
+	public ResponseEntity<String> insertQuery(@RequestBody FcrQuery fcrQuery) {
 		String res = queryService.insertQuery(fcrQuery);
-		return new ResponseEntity<String>(res,HttpStatus.OK);
+		return new ResponseEntity<String>(res, HttpStatus.OK);
 	}
+
 	@GetMapping("/fetchQuery")
-	public ResponseEntity<List<FcrQuery>> fetchQuery(@RequestParam String childReviewId){
-		return new ResponseEntity<List<FcrQuery>>(queryService.getQuery(childReviewId),HttpStatus.OK);
+	public ResponseEntity<List<FcrQuery>> fetchQuery(@RequestParam String childReviewId) {
+		return new ResponseEntity<List<FcrQuery>>(queryService.getQuery(childReviewId), HttpStatus.OK);
 	}
+
 	@DeleteMapping("/deleteQuery")
-	public ResponseEntity<String> deleteQuery(@RequestParam String querySeq,@RequestParam String childReviewId) {
+	public ResponseEntity<String> deleteQuery(@RequestParam String querySeq, @RequestParam String childReviewId) {
 		String result = queryService.deleteQuery(querySeq, childReviewId);
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
+
 	@PutMapping("/updateResponse")
-	public ResponseEntity<String> updateResponse(@RequestParam String response,@RequestParam String responseBy,@RequestParam String responseOn,@RequestParam String querySeq,@RequestParam String childReviewId) {
+	public ResponseEntity<String> updateResponse(@RequestParam String response, @RequestParam String responseBy,
+			@RequestParam String responseOn, @RequestParam String querySeq, @RequestParam String childReviewId) {
 		String querys = queryService.updateQueryResponse(response, responseBy, responseOn, querySeq, childReviewId);
-		return new ResponseEntity<String>(querys,HttpStatus.OK);
+		return new ResponseEntity<String>(querys, HttpStatus.OK);
 	}
+
 //	-----------------------------------
 //	---------------------File Upload-------------
-	 @PostMapping("/uploadDocuments")
-	    public String uploadFile(@RequestParam("file") MultipartFile file) {
-	        try {
-	            // Save the file to the specified path
-	            String filePath = docTagService.saveFile(file);
-	            String fileName = file.getOriginalFilename();
-	            // Convert the file to Base64 URL and save it to the database
-	            String base64Url = docTagService.convertFileToBase64Url(filePath);
-	            docTagService.saveFileDetails(fileName,base64Url);
+	@PostMapping("/uploadDocuments")
+	public String uploadFile(@RequestParam("file") MultipartFile file) {
+		try {
+			// Save the file to the specified path
+			String filePath = docTagService.saveFile(file);
+			String fileName = file.getOriginalFilename();
+			// Convert the file to Base64 URL and save it to the database
+			String base64Url = docTagService.convertFileToBase64Url(filePath);
+			docTagService.saveFileDetails(fileName, base64Url);
 
-	            return base64Url;
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	            return "File upload failed.";
-	        }
-	    }
+			return base64Url;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "File upload failed.";
+		}
+	}
 //	---------------------------------
 }
