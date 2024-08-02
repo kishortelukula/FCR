@@ -1,5 +1,7 @@
 package com.fcr.entity;
 
+import java.sql.Clob;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,22 +17,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class FcrQuery {
-
+public class FcrDocTag {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long slNo;
-	private String querySeq;
-	@Column(length = 300)
-	private String query;
-	private String createdOn;
-	private String createdBy;
-	private String assignedTo;
-	private String response;
-	private String responseBy;
-	private String responseOn;
-	private String childReviewId;
+	private Long id;
+	private String fileName;
+	@Column(length = 4000)
+	private String filePath;
 	private String reviewId;
-	private String obligorCifId;
-	private String updatedOn;
+	
+
 }

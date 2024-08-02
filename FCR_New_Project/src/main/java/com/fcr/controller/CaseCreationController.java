@@ -1,5 +1,6 @@
 package com.fcr.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.fcr.dto.CaseCreation;
 import com.fcr.entity.AuditTrail;
 import com.fcr.entity.CaseDetails;
 import com.fcr.entity.Comments;
+import com.fcr.entity.FcrDocTag;
 import com.fcr.entity.FcrObligor;
 import com.fcr.entity.FcrQuery;
 import com.fcr.entity.FcrResponseRemedations;
@@ -25,6 +27,7 @@ import com.fcr.services.CaseCreationService;
 import com.fcr.services.CaseDetailsService;
 import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
+import com.fcr.services.FcrDocTagService;
 import com.fcr.services.FileUpload;
 import com.fcr.services.ObligorService;
 import com.fcr.services.QueryService;
@@ -71,6 +74,9 @@ public class CaseCreationController {
 	
 	@Autowired
 	QueryService queryService;
+	
+	@Autowired
+	FcrDocTagService docTagService;
 	
 	
 	@PostMapping("/caseCreation")
@@ -252,5 +258,23 @@ public class CaseCreationController {
 		String querys = queryService.updateQueryResponse(response, responseBy, responseOn, querySeq, childReviewId);
 		return new ResponseEntity<String>(querys,HttpStatus.OK);
 	}
-//	----------------------------------
+//	-----------------------------------
+//	---------------------File Upload-------------
+	 @PostMapping("/uploadDocuments")
+	    public String uploadFile(@RequestParam("file") MultipartFile file) {
+	        try {
+	            // Save the file to the specified path
+	            String filePath = docTagService.saveFile(file);
+	            String fileName = file.getOriginalFilename();
+	            // Convert the file to Base64 URL and save it to the database
+	            String base64Url = docTagService.convertFileToBase64Url(filePath);
+	            docTagService.saveFileDetails(fileName,base64Url);
+
+	            return base64Url;
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return "File upload failed.";
+	        }
+	    }
+//	---------------------------------
 }
