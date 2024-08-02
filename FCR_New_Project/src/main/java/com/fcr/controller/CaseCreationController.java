@@ -239,8 +239,8 @@ public class CaseCreationController {
 		return new ResponseEntity<String>(res,HttpStatus.OK);
 	}
 	@GetMapping("/fetchQuery")
-	public ResponseEntity<List<FcrQuery>> fetchQuery(@RequestParam String querySeq,@RequestParam String childReviewId){
-		return new ResponseEntity<List<FcrQuery>>(queryService.getQuery(querySeq,childReviewId),HttpStatus.OK);
+	public ResponseEntity<List<FcrQuery>> fetchQuery(@RequestParam String childReviewId){
+		return new ResponseEntity<List<FcrQuery>>(queryService.getQuery(childReviewId),HttpStatus.OK);
 	}
 	@DeleteMapping("/deleteQuery")
 	public ResponseEntity<String> deleteQuery(@RequestParam String querySeq,@RequestParam String childReviewId) {

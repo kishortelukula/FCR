@@ -19,8 +19,8 @@ public class QueryService {
 		return "Query Inserted";
 	}
 	
-	public List<FcrQuery> getQuery(String querySeq,String childReviewId){
-		return queryRepo.getQuery(querySeq,childReviewId);
+	public List<FcrQuery> getQuery(String childReviewId){
+		return queryRepo.getQuery(childReviewId);
 	}
 	
 	public String deleteQuery(String querySeq,String childReviewId) {

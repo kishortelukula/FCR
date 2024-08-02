@@ -13,8 +13,8 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface QueryRepo extends JpaRepository<FcrQuery, Long>{
 	
-	@Query("select a from FcrQuery as a  where a.querySeq=:querySeq and a.childReviewId=:childReviewId")
-	public List<FcrQuery> getQuery(String querySeq,String childReviewId);
+	@Query("select a from FcrQuery as a  where  a.childReviewId=:childReviewId")
+	public List<FcrQuery> getQuery(String childReviewId);
 	
 	@Transactional
 	@Modifying
