@@ -17,6 +17,7 @@ import com.fcr.entity.AuditTrail;
 import com.fcr.entity.CaseDetails;
 import com.fcr.entity.Comments;
 import com.fcr.entity.FcrObligor;
+import com.fcr.entity.FcrQuery;
 import com.fcr.entity.FcrResponseRemedations;
 import com.fcr.entity.TaskDetails;
 import com.fcr.services.AuditService;
@@ -26,6 +27,7 @@ import com.fcr.services.CommentService;
 import com.fcr.services.FcrAdminService;
 import com.fcr.services.FileUpload;
 import com.fcr.services.ObligorService;
+import com.fcr.services.QueryService;
 import com.fcr.services.ResponseRemedationService;
 import com.fcr.services.TaskService;
 
@@ -67,6 +69,8 @@ public class CaseCreationController {
 	@Autowired
     private FileUpload fileUpload;
 	
+	@Autowired
+	QueryService queryService;
 	
 	
 	@PostMapping("/caseCreation")
@@ -228,7 +232,25 @@ public class CaseCreationController {
         return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
     }
 //	--------------------
-//	-----------------------------
-	
+//	----------------Query-------------
+	@PostMapping("/insertQuery")
+	public ResponseEntity<String> insertQuery(@RequestBody FcrQuery fcrQuery){
+		String res = queryService.insertQuery(fcrQuery);
+		return new ResponseEntity<String>(res,HttpStatus.OK);
+	}
+	@GetMapping("/fetchQuery")
+	public ResponseEntity<List<FcrQuery>> fetchQuery(@RequestParam String querySeq,@RequestParam String childReviewId){
+		return new ResponseEntity<List<FcrQuery>>(queryService.getQuery(querySeq,childReviewId),HttpStatus.OK);
+	}
+	@DeleteMapping("/deleteQuery")
+	public ResponseEntity<String> deleteQuery(@RequestParam String querySeq,@RequestParam String childReviewId) {
+		String result = queryService.deleteQuery(querySeq, childReviewId);
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
+	@PutMapping("/updateResponse")
+	public ResponseEntity<String> updateResponse(@RequestParam String response,@RequestParam String responseBy,@RequestParam String responseOn,@RequestParam String querySeq,@RequestParam String childReviewId) {
+		String querys = queryService.updateQueryResponse(response, responseBy, responseOn, querySeq, childReviewId);
+		return new ResponseEntity<String>(querys,HttpStatus.OK);
+	}
 //	----------------------------------
 }
