@@ -27,5 +27,10 @@ public class TaskService {
 		return repository.fetchByReviewId(reviewId);
 	}
 	
+	public String createSpocTask(TaskDetails taskDetails ) {
+		repository.save(taskDetails);
+		return "Created Spoc Task Successfully";		
+	}
+	
 
 }

@@ -108,6 +108,13 @@ public class CaseCreationController {
 		return new ResponseEntity<List<TaskDetails>>(taskService.getGroupTasks(groupName, userName), HttpStatus.OK);
 
 	}
+	
+	@PostMapping("/createSpocTask")
+	public ResponseEntity<String> caseCreationBySpoc(@RequestBody TaskDetails taskDetails) {
+		String created = taskService.createSpocTask(taskDetails);
+		return new ResponseEntity<String>(created, HttpStatus.OK);
+	}
+
 
 	@GetMapping("/Group")
 	public ResponseEntity<List<String>> findDivision(@RequestParam("group") String group) {
