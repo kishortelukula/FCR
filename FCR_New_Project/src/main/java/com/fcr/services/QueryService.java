@@ -32,4 +32,9 @@ public class QueryService {
 		queryRepo.updateQueryResponse(response, responseBy, responseOn, querySeq, childReviewId);
 		return "Updated Query Response Successfully";
 	}
+	
+	public String deleteQueryByReview(String childReviewId) {
+		queryRepo.deleteQueryByChildReview(childReviewId);
+		return "Querys Deleted by childReviewId Successfully";
+	}
 }

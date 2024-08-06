@@ -25,4 +25,9 @@ public interface QueryRepo extends JpaRepository<FcrQuery, Long>{
 	@Modifying
 	@Query("update FcrQuery f set f.response=:response,f.responseBy=:responseBy,f.responseOn=:responseOn where f.querySeq=:querySeq and f.childReviewId=:childReviewId")
 	public void updateQueryResponse(String response,String responseBy,String responseOn,String querySeq,String childReviewId);
+	
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM FcrQuery t WHERE t.childReviewId=:childReviewId")
+	public void deleteQueryByChildReview(String childReviewId);
 }

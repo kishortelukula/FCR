@@ -12,6 +12,8 @@ import com.fcr.repository.ResponseRemedationRepo;
 public class ResponseRemedationService {
 	@Autowired
 	ResponseRemedationRepo remedationRepo;
+	@Autowired
+	QueryService queryService;
 	
 	public String insertResponseRemedation(FcrResponseRemedations fcrResponseRemedation) {
 		remedationRepo.save(fcrResponseRemedation);
@@ -31,6 +33,7 @@ public class ResponseRemedationService {
 	
 	public String deleteResponseRemedation(String reviewId,String childReviewId) {
 		remedationRepo.deleteByReviewIdAndChildReviewId(reviewId, childReviewId);
+		queryService.deleteQueryByReview(childReviewId);
 		return "Deleted Successfully";
 	}
 	
