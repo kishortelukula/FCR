@@ -247,6 +247,12 @@ public class CaseCreationController {
 		String querys = responseRemedationService.updateQuery(query, reviewId, childReviewId);
 		return new ResponseEntity<String>(querys, HttpStatus.OK);
 	}
+	
+	@GetMapping("/fetchResponseRemedationById")
+	public ResponseEntity<List<FcrResponseRemedations>> fetchResponseRemedationByChildReviewId(@RequestParam String reviewId,@RequestParam String childReviewId) {
+		return new ResponseEntity<List<FcrResponseRemedations>>(
+				responseRemedationService.fetchResponseByChildReviewId(reviewId,childReviewId), HttpStatus.OK);
+	}
 
 //	-----------------------------
 //	-------------File Upload------------

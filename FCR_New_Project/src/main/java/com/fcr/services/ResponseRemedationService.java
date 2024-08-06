@@ -42,4 +42,10 @@ public class ResponseRemedationService {
 		return "Query Updated Succesfully";
 		
 	}
+	
+	public List<FcrResponseRemedations> fetchResponseByChildReviewId(String reviewId,String childReviewId) {
+		return remedationRepo.fetchResponseRemedationByChildReviewId(reviewId, childReviewId);
+		
+		 
+	}
 }
