@@ -53,8 +53,8 @@ public class CaseCreationService {
 
 	}
 
-	public void updateCase(String role ,String assignTo,String reviewId) {
-		fcrRepository.updateCase(role,assignTo,reviewId);
+	public void updateCase(String role ,String assignTo,String taskStatus,String reviewId) {
+		fcrRepository.updateCase(role,assignTo,taskStatus,reviewId);
 		
 	}
 

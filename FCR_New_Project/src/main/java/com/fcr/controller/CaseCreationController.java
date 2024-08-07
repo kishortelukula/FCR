@@ -84,9 +84,9 @@ public class CaseCreationController {
 	}
 
 	@PutMapping("/updateTask")
-	public ResponseEntity<String> updateCase(@RequestParam String role, @RequestParam String assignTo,
+	public ResponseEntity<String> updateCase(@RequestParam String role, @RequestParam String assignTo,@RequestParam String taskStatus,
 			@RequestParam String reviewId) {
-		creationService.updateCase(role, assignTo, reviewId);
+		creationService.updateCase(role, assignTo, taskStatus, reviewId);
 		return new ResponseEntity<String>("UpdatedTask", HttpStatus.OK);
 	}
 
