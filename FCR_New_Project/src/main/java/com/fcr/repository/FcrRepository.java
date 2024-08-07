@@ -14,10 +14,10 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface FcrRepository extends JpaRepository<TaskDetails, Long>{
 	
-	@Query("select a from TaskDetails as a  where a.assignTo=?1 and a.assignTo !=?2")
+	@Query("select a from TaskDetails as a  where a.assignTo=?1 and a.assignTo !=?2 and a.taskStatus!='Completed'")
 	public List<TaskDetails> groupTask(String groupName, String userName);
 	
-	@Query("select a from TaskDetails as a  where a.assignTo=?1")
+	@Query("select a from TaskDetails as a  where a.assignTo=?1 and a.taskStatus!='Completed'")
 	public List<TaskDetails> myTask(String userName);
 	
 	@Query("select a from TaskDetails as a  where a.reviewId=?1")
