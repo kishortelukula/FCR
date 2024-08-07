@@ -57,5 +57,10 @@ public class CaseCreationService {
 		fcrRepository.updateCase(role,assignTo,taskStatus,reviewId);
 		
 	}
+	
+	public void updateCaseByCreditRebiewId(String role ,String assignTo,String taskStatus,String childReviedId) {
+		fcrRepository.updateCaseByChildReviewId(role,assignTo,taskStatus,childReviedId);
+		
+	}
 
 }

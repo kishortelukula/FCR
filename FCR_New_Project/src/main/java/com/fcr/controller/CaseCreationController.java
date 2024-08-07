@@ -89,6 +89,13 @@ public class CaseCreationController {
 		creationService.updateCase(role, assignTo, taskStatus, reviewId);
 		return new ResponseEntity<String>("UpdatedTask", HttpStatus.OK);
 	}
+	
+	@PutMapping("/updateSpocTaskStatus")
+	public ResponseEntity<String> updateSpocTaskStatus(@RequestParam String role, @RequestParam String assignTo,@RequestParam String taskStatus,
+			@RequestParam String childReviedId) {
+		creationService.updateCaseByCreditRebiewId(role, assignTo, taskStatus, childReviedId);
+		return new ResponseEntity<String>("UpdatedTask", HttpStatus.OK);
+	}
 
 	@GetMapping("/fetchByReviewId")
 	public ResponseEntity<List<TaskDetails>> fetchReview(@RequestParam String reviewId) {
