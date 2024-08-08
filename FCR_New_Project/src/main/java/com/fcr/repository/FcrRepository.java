@@ -25,7 +25,7 @@ public interface FcrRepository extends JpaRepository<TaskDetails, Long>{
 	
 	@Modifying
 	@Transactional
-	@Query("UPDATE TaskDetails t SET t.role = :role ,t.assignTo =:assignTo,t.taskStatus=:taskStatus WHERE t.reviewId = :reviewId")
+	@Query("UPDATE TaskDetails t SET t.role = :role ,t.assignTo =:assignTo,t.taskStatus=:taskStatus WHERE t.reviewId = :reviewId and t.childReviedId is null and t.issueId is null")
 	public void updateCase(String role,String assignTo,String taskStatus,String reviewId);
 	
 	@Modifying
